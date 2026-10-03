@@ -1,0 +1,11 @@
+# Netlify configuration file for Power Soft Global Solutions
+
+[build]
+  # Publish the current directory where index.html is located
+  publish = "."
+
+# Handle clean URL routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
