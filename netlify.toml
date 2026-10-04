@@ -4,7 +4,11 @@
   # Publish the current directory where index.html is located
   publish = "."
 
-# Handle clean URL routing
+# Enable Netlify Forms
+[build.processing]
+  skip_processing = false
+
+# Handle clean URL routing — Netlify Forms POST processing takes priority over this
 [[redirects]]
   from = "/*"
   to = "/index.html"

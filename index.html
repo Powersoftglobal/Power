@@ -42,8 +42,8 @@
 
 <body>
 
-  <!-- Netlify Forms: Hidden form for bot detection & form registration -->
-  <form name="consultation-request" netlify netlify-honeypot="bot-field" hidden>
+  <!-- Netlify Forms: Hidden form for Netlify build scanner to register the form -->
+  <form name="consultation-request" data-netlify="true" data-netlify-honeypot="bot-field" style="display:none">
     <input name="full-name">
     <input name="email">
     <input name="company">
@@ -1587,7 +1587,7 @@
               Fill in your project requirements below. All submissions are backed by strict mutual NDA.
             </p>
 
-            <form id="consultationForm" name="consultation-request" netlify netlify-honeypot="bot-field" novalidate>
+            <form id="consultationForm" name="consultation-request" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
               <!-- Netlify honeypot anti-spam field -->
               <p style="display:none;">
                 <label>Don't fill this out: <input name="bot-field"></label>
