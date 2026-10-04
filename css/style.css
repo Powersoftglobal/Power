@@ -557,13 +557,23 @@ button, input, select, textarea {
 .logo-symbol {
   width: 42px;
   height: 42px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #0284c7 0%, #4f46e5 50%, #9333ea 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast, 0.2s ease);
+}
+
+.logo-symbol img,
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-logo:hover .logo-symbol {
+  transform: scale(1.05);
 }
 
 .logo-text-group {

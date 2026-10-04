@@ -324,13 +324,23 @@ textarea {
 .logo-symbol {
   width: 42px;
   height: 42px;
-  border-radius: 12px;
-  background: var(--gradient-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast, 0.2s ease);
+}
+
+.logo-symbol img,
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-logo:hover .logo-symbol {
+  transform: scale(1.05);
 }
 
 .logo-text-group {
