@@ -346,7 +346,19 @@ textarea {
 .logo-text-group {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  justify-content: center;
+}
+
+.logo-text-img {
+  height: 32px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  display: block;
+}
+
+.mobile-drawer .logo-text-img {
+  height: 26px;
 }
 
 .logo-title {
