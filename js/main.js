@@ -766,3 +766,96 @@ function showToast(message, type = 'info') {
     setTimeout(() => toast.remove(), 300);
   }, 4000);
 }
+
+/* ==========================================================================
+   13. Contact / Consultation Form — Netlify Forms Integration
+   ========================================================================== */
+function initContactForm() {
+  const form = document.getElementById('consultationForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nameField    = document.getElementById('contactName');
+    const emailField   = document.getElementById('contactEmail');
+    const messageField = document.getElementById('contactMessage');
+    const submitBtn    = document.getElementById('submitContactBtn');
+
+    // --- Basic Validation ---
+    if (!nameField.value.trim()) {
+      showToast('Please enter your full name.', 'error');
+      nameField.focus();
+      return;
+    }
+    if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+      showToast('Please enter a valid email address.', 'error');
+      emailField.focus();
+      return;
+    }
+    if (!messageField.value.trim()) {
+      showToast('Please describe your project objectives.', 'error');
+      messageField.focus();
+      return;
+    }
+
+    // --- Loading State ---
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        style="animation: spin 1s linear infinite;">
+        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+      </svg>
+      <span>Sending...</span>
+    `;
+
+    // --- Add spin keyframe if not present ---
+    if (!document.getElementById('spinKeyframe')) {
+      const style = document.createElement('style');
+      style.id = 'spinKeyframe';
+      style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+      document.head.appendChild(style);
+    }
+
+    // --- Collect selected services ---
+    const services = [...form.querySelectorAll('input[name="services"]:checked')]
+      .map(cb => cb.value).join(', ');
+
+    // --- Build FormData for Netlify ---
+    const formData = new FormData();
+    formData.append('form-name', 'consultation-request');
+    formData.append('full-name',  nameField.value.trim());
+    formData.append('email',      emailField.value.trim());
+    formData.append('company',    document.getElementById('contactCompany')?.value.trim() || '');
+    formData.append('phone',      document.getElementById('contactPhone')?.value.trim() || '');
+    formData.append('services',   services || 'None selected');
+    formData.append('budget',     document.getElementById('contactBudget')?.value || '');
+    formData.append('message',    messageField.value.trim());
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        showToast('Thank you! We\'ll be in touch within 24 hours.', 'success');
+        form.reset();
+        // Restore default checked state for service checkboxes
+        form.querySelectorAll('input[name="services"]').forEach((cb, i) => {
+          if (i < 2) cb.checked = true;
+        });
+      } else {
+        throw new Error(`Server responded with status ${response.status}`);
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+      showToast('Submission failed. Please email us directly at info@powersoftsolution.com', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalHTML;
+    }
+  });
+}
