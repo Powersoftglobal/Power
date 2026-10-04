@@ -5,19 +5,10 @@
 (function () {
   'use strict';
 
-  // ---- Theme ----
+  // ---- Theme (Permanently Locked to Clean Light Mode) ----
   const root = document.documentElement;
-  const savedTheme = localStorage.getItem('psg-theme') || 'light';
-  root.setAttribute('data-theme', savedTheme);
-
-  document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('psg-theme', next);
-    });
-  });
+  root.setAttribute('data-theme', 'light');
+  localStorage.setItem('psg-theme', 'light');
 
   // ---- Scroll Progress ----
   const bar = document.getElementById('scroll-progress');
