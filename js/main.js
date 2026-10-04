@@ -295,7 +295,7 @@ const serviceData = {
     description: 'Shield enterprise assets with impenetrable zero-trust security postures, automated continuous compliance audits, and proactive vulnerability remediation.',
     deliverables: [
       'Full Infrastructure Penetration Testing & Vulnerability Assessment',
-      'SOC 2 Type II, ISO 27001 & HIPAA Readiness & Compliance Support',
+      'Security Best Practices, Data Privacy & Audit Readiness Support',
       'Zero-Trust Identity & Access Management (IAM) Integration',
       'Cloud Security Posture Management (CSPM) & Threat Monitoring',
       'Incident Response Protocols & Automated Threat Mitigation'
@@ -552,22 +552,28 @@ function initFaqAccordion() {
    ========================================================================== */
 const caseStudyData = {
   'fintech': {
-    title: 'FinTech MegaBank: Real-Time Fraud & Cloud Streaming',
-    client: 'Global Apex Bank Corp',
-    results: '40,000 tx/sec throughput, 99.999% SLA uptime, 74% reduction in fraud detection latency',
-    body: 'Apex Bank was struggling with legacy mainframe batch processing that delayed fraud alerts by up to 45 minutes. Power Soft Global Solutions architected a cloud-native real-time event streaming pipeline using Apache Kafka, Snowflake, and predictive AI models on AWS. The solution instantly classifies high-risk transactions within 12 milliseconds.'
+    title: 'Government of Andhra Pradesh: Citizen Service Delivery Modernization',
+    client: 'Government of Andhra Pradesh (Public Sector)',
+    results: '99.9% portal uptime, sub-second query response, 100% digitized workflow across departments',
+    body: 'Power Soft Global Solutions worked with the Government of Andhra Pradesh to modernize public service delivery workflows. We engineered high-availability application architecture, streamlined citizen query resolution databases, and ensured reliable data access across government departments with enhanced data security and zero downtime.'
+  },
+  'apgovt': {
+    title: 'Government of Andhra Pradesh: Citizen Service Delivery Modernization',
+    client: 'Government of Andhra Pradesh (Public Sector)',
+    results: '99.9% portal uptime, sub-second query response, 100% digitized workflow across departments',
+    body: 'Power Soft Global Solutions worked with the Government of Andhra Pradesh to modernize public service delivery workflows. We engineered high-availability application architecture, streamlined citizen query resolution databases, and ensured reliable data access across government departments with enhanced data security and zero downtime.'
   },
   'ecommerce': {
-    title: 'OmniRetail: 240% Organic Traffic & 3.4x Conversion Scaling',
-    client: 'OmniRetail Global Brands',
-    results: '+240% Organic Search Traffic, 3.4x E-Commerce Conversion Rate, $38M incremental sales',
-    body: 'Power Soft’s Digital Marketing & Growth Engineering team completed an exhaustive technical SEO overhaul, implemented multi-touch attribution, and engineered dynamic personalized landing pages with automated A/B conversion funnels.'
+    title: 'OmniRetail: Organic Traffic Growth & Conversion Scaling',
+    client: 'OmniRetail Enterprise',
+    results: '+180% Organic Search Visibility, 2.6x Conversion Rate Improvement, Streamlined Checkout',
+    body: 'Power Soft’s Digital Marketing & Web Development team conducted an end-to-end technical SEO overhaul, optimized page performance, and redesigned responsive conversion funnels to improve sales and organic customer acquisition.'
   },
   'healthtech': {
-    title: 'NovaHealth: HIPAA-Compliant Microservice Migration',
+    title: 'NovaHealth: HIPAA-Compliant Healthcare Cloud Migration',
     client: 'NovaHealth Integrated Network',
-    results: 'Zero downtime migration across 4.2M patient records, SOC2 & HIPAA certified architecture',
-    body: 'Transitioned a complex 10-year-old monolithic healthcare portal to a modern containerized microservice mesh on Microsoft Azure with zero-trust encryption and automated disaster recovery.'
+    results: 'Zero downtime migration across 50,000+ patient records, HIPAA-compliant cloud architecture',
+    body: 'Successfully modernized medical database infrastructure into a secure, HIPAA-compliant cloud environment with granular role-based access control, encrypted patient records, and automated backups.'
   }
 };
 
