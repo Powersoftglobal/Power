@@ -7,7 +7,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initScrollEffects();
-  initHeroCanvas();
   initStatsCounter();
   initServiceFilters();
   initCostEstimator();
@@ -96,80 +95,8 @@ function initScrollEffects() {
    3. Interactive Hero Canvas (Adapts to Light & Dark Theme)
    ========================================================================== */
 function initHeroCanvas() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let width, height;
-  let particles = [];
-  const particleCount = 45;
-  const maxDistance = 140;
-
-  function resize() {
-    width = canvas.width = canvas.parentElement.offsetWidth;
-    height = canvas.height = canvas.parentElement.offsetHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.7;
-      this.vy = (Math.random() - 0.5) * 0.7;
-      this.radius = Math.random() * 2 + 1;
-    }
-
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
-    }
-
-    draw(isDark) {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = isDark ? `rgba(0, 242, 254, 0.8)` : `rgba(2, 132, 199, 0.7)`;
-      ctx.shadowBlur = isDark ? 8 : 4;
-      ctx.shadowColor = isDark ? `rgba(0, 242, 254, 0.9)` : `rgba(2, 132, 199, 0.3)`;
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update();
-      particles[i].draw(isDark);
-
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < maxDistance) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          const alpha = (1 - dist / maxDistance) * (isDark ? 0.22 : 0.32);
-          ctx.strokeStyle = isDark ? `rgba(0, 242, 254, ${alpha})` : `rgba(2, 132, 199, ${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(animate);
-  }
-  animate();
+  // Clean human-crafted layout uses refined editorial photography without artificial particle lines
+  return;
 }
 
 /* ==========================================================================
@@ -240,7 +167,7 @@ const serviceData = {
     deliverables: [
       'Modern Data Warehouse Architecture (Snowflake, Databricks)',
       'End-to-End Automated Real-time ETL / ELT Pipelines',
-      'Executive Power BI & Tableau Dashboards with Live Telemetry',
+      'Executive Power BI & Tableau Dashboards with Live Metrics',
       'Predictive Machine Learning Customer & Revenue Models',
       'Data Governance, Privacy (GDPR/HIPAA) & Master Data Management'
     ],
@@ -600,16 +527,6 @@ function initCaseStudyModals() {
       }
     });
   });
-
-  // Video Overview Modal Trigger
-  const videoBtn = document.getElementById('watchOverviewBtn');
-  const videoModal = document.getElementById('videoOverviewModal');
-  if (videoBtn && videoModal) {
-    videoBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      videoModal.classList.add('active');
-    });
-  }
 
   // Generic close modal bindings
   document.querySelectorAll('.modal-close-btn, .modal-backdrop-close').forEach(btn => {

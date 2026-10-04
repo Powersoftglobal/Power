@@ -287,6 +287,15 @@ button, input, select, textarea {
   height: 15px;
 }
 
+.badge-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald, #059669);
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+
 .section-title {
   margin-bottom: 20px;
 }
@@ -427,7 +436,7 @@ button, input, select, textarea {
 }
 
 [data-theme="dark"] .bg-ambient-orb {
-  opacity: 0.45;
+  opacity: 0.16;
 }
 
 .orb-1 {
@@ -782,7 +791,25 @@ button, input, select, textarea {
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-  margin-bottom: 45px;
+  margin-bottom: 18px;
+}
+
+.hero-subtext {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.hero-inline-link {
+  color: var(--accent-cyan);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.hero-inline-link:hover {
+  color: var(--accent-blue);
 }
 
 .hero-stats {
@@ -816,7 +843,7 @@ button, input, select, textarea {
   font-weight: 500;
 }
 
-/* Hero Visual Showcase */
+/* Hero Visual Showcase - Human Studio Frame */
 .hero-visual-wrapper {
   position: relative;
 }
@@ -826,18 +853,23 @@ button, input, select, textarea {
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 1px solid var(--border-light);
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1), var(--shadow-glow-cyan);
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.1), 0 2px 8px rgba(15, 23, 42, 0.04);
   background: var(--bg-card);
-  transition: transform var(--transition-normal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 [data-theme="dark"] .hero-card-frame {
-  border-color: var(--border-glow);
-  box-shadow: var(--shadow-glow-cyan), var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .hero-card-frame:hover {
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-4px);
+  box-shadow: 0 28px 56px -12px rgba(15, 23, 42, 0.14), 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] .hero-card-frame:hover {
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .hero-card-image {
@@ -847,72 +879,58 @@ button, input, select, textarea {
   display: block;
 }
 
-/* Floating telemetry badges over hero image */
-.telemetry-chip {
+/* Studio Bottom Caption Bar */
+.hero-card-caption {
   position: absolute;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid var(--border-light);
-  backdrop-filter: blur(14px);
-  padding: 12px 18px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-light);
+  padding: 13px 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  z-index: 3;
-  animation: float-chip 6s ease-in-out infinite;
+  font-size: 0.85rem;
+  z-index: 2;
 }
 
-[data-theme="dark"] .telemetry-chip {
-  background: rgba(11, 17, 32, 0.88);
-  box-shadow: var(--shadow-md);
+[data-theme="dark"] .hero-card-caption {
+  background: rgba(11, 17, 32, 0.92);
+  border-top-color: rgba(255, 255, 255, 0.08);
 }
 
-.chip-top-left {
-  top: 24px;
-  left: -20px;
-  animation-delay: 0s;
-}
-
-.chip-bottom-right {
-  bottom: 30px;
-  right: -20px;
-  animation-delay: 3s;
-}
-
-@keyframes float-chip {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.chip-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(2, 132, 199, 0.1);
-  color: var(--accent-cyan);
+.caption-location {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.chip-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.chip-title {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
+  gap: 8px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  color: var(--text-main);
 }
 
-.chip-value {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-main);
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald, #059669);
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25);
+  animation: pulse-dot 2.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(5, 150, 105, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+}
+
+.caption-tag {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 /* ==========================================================================
@@ -1040,14 +1058,14 @@ button, input, select, textarea {
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(2, 132, 199, 0.35);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), 0 0 25px rgba(2, 132, 199, 0.12);
+  transform: translateY(-4px);
+  border-color: rgba(2, 132, 199, 0.3);
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.03);
 }
 
 [data-theme="dark"] .service-card:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 242, 254, 0.15);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .service-card:hover::before {
@@ -1072,13 +1090,13 @@ button, input, select, textarea {
 .service-card:hover .service-icon-box {
   background: var(--gradient-primary);
   color: #ffffff;
-  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
-  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.25);
+  transform: translateY(-2px);
 }
 
 [data-theme="dark"] .service-card:hover .service-icon-box {
   color: #060911;
-  box-shadow: 0 8px 20px rgba(0, 242, 254, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 242, 254, 0.3);
 }
 
 .service-category {
