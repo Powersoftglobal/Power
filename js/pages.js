@@ -99,4 +99,10 @@
 
   document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObserver.observe(el));
 
+  // ---- Dynamic Copyright Year ----
+  const currentYear = new Date().getFullYear();
+  document.querySelectorAll('#copyright-year, .copyright-year').forEach(el => {
+    el.textContent = currentYear;
+  });
+
 })();

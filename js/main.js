@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCaseStudyModals();
   initContactForm();
   initMobileNav();
+  initCopyrightYear();
 });
 
 /* ==========================================================================
@@ -858,5 +859,15 @@ function initContactForm() {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalHTML;
     }
+  });
+}
+
+/* ==========================================================================
+   14. Dynamic Copyright Year
+   ========================================================================== */
+function initCopyrightYear() {
+  const currentYear = new Date().getFullYear();
+  document.querySelectorAll('#copyright-year, .copyright-year').forEach(el => {
+    el.textContent = currentYear;
   });
 }

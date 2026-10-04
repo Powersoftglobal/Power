@@ -1587,7 +1587,8 @@
               Fill in your project requirements below. All submissions are backed by strict mutual NDA.
             </p>
 
-            <form id="consultationForm" name="consultation-request" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+            <form id="consultationForm" name="consultation-request" data-netlify="true"
+              data-netlify-honeypot="bot-field" novalidate>
               <!-- Netlify honeypot anti-spam field -->
               <p style="display:none;">
                 <label>Don't fill this out: <input name="bot-field"></label>
@@ -1596,12 +1597,14 @@
               <div class="form-group-row">
                 <div class="form-group">
                   <label for="contactName" class="form-label">Full Name *</label>
-                  <input type="text" id="contactName" name="full-name" class="form-input" placeholder="e.g. Sarah Jenkins" required>
+                  <input type="text" id="contactName" name="full-name" class="form-input"
+                    placeholder="e.g. Sarah Jenkins" required>
                 </div>
 
                 <div class="form-group">
                   <label for="contactEmail" class="form-label">Corporate Email *</label>
-                  <input type="email" id="contactEmail" name="email" class="form-input" placeholder="s.jenkins@company.com" required>
+                  <input type="email" id="contactEmail" name="email" class="form-input"
+                    placeholder="s.jenkins@company.com" required>
                 </div>
               </div>
 
@@ -1780,7 +1783,7 @@
       <!-- Footer Bottom -->
       <div class="footer-bottom">
         <div>
-          &copy; 2026 Power Soft Global Solutions Inc. All Rights Reserved.
+          &copy; <span id="copyright-year" class="copyright-year"></span> Power Soft Global Solutions. All Rights Reserved.
         </div>
         <div class="footer-legal-links">
           <a href="#">Privacy Policy</a>
