@@ -823,32 +823,33 @@ function initContactForm() {
     const services = [...form.querySelectorAll('input[name="services"]:checked')]
       .map(cb => cb.value).join(', ');
 
-    // --- Build FormData for Netlify ---
-    const formData = new FormData();
-    formData.append('form-name', 'consultation-request');
-    formData.append('full-name',  nameField.value.trim());
-    formData.append('email',      emailField.value.trim());
-    formData.append('company',    document.getElementById('contactCompany')?.value.trim() || '');
-    formData.append('phone',      document.getElementById('contactPhone')?.value.trim() || '');
-    formData.append('services',   services || 'None selected');
-    formData.append('budget',     document.getElementById('contactBudget')?.value || '');
-    formData.append('message',    messageField.value.trim());
+    // --- Build URL-encoded body (required by Netlify Forms) ---
+    const params = new URLSearchParams();
+    params.append('form-name', 'consultation-request');
+    params.append('full-name',  nameField.value.trim());
+    params.append('email',      emailField.value.trim());
+    params.append('company',    document.getElementById('contactCompany')?.value.trim() || '');
+    params.append('phone',      document.getElementById('contactPhone')?.value.trim() || '');
+    params.append('services',   services || 'None selected');
+    params.append('budget',     document.getElementById('contactBudget')?.value || '');
+    params.append('message',    messageField.value.trim());
 
     try {
       const response = await fetch('/', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
       });
 
       if (response.ok) {
-        showToast('Thank you! We\'ll be in touch within 24 hours.', 'success');
+        showToast("Thank you! We'll be in touch within 24 hours.", 'success');
         form.reset();
-        // Restore default checked state for service checkboxes
+        // Restore default checked state for the first two service checkboxes
         form.querySelectorAll('input[name="services"]').forEach((cb, i) => {
           if (i < 2) cb.checked = true;
         });
       } else {
-        throw new Error(`Server responded with status ${response.status}`);
+        throw new Error(`Netlify responded with status ${response.status}`);
       }
     } catch (err) {
       console.error('Form submission error:', err);
