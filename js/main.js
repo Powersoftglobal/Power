@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initMobileNav();
   initCopyrightYear();
+  initNewsletterForm();
 });
 
 /* ==========================================================================
@@ -760,5 +761,46 @@ function initCopyrightYear() {
   const currentYear = new Date().getFullYear();
   document.querySelectorAll('#copyright-year, .copyright-year').forEach(el => {
     el.textContent = currentYear;
+  });
+}
+
+/* ==========================================================================
+   15. Newsletter Subscription
+   ========================================================================== */
+function initNewsletterForm() {
+  const form = document.getElementById('newsletterForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById('newsletterEmail');
+    const btn = form.querySelector('button[type="submit"]');
+
+    if (!emailInput.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+      showToast('Please enter a valid email address.', 'error');
+      emailInput.focus();
+      return;
+    }
+
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Subscribing...';
+    btn.disabled = true;
+
+    // Simulate API call for local testing
+    setTimeout(() => {
+      btn.innerHTML = 'Subscribed';
+      btn.style.backgroundColor = '#10b981'; // Success green
+      btn.style.borderColor = '#10b981';
+      showToast('Subscribed! (Confirmation email simulated to info@powersoftsolution.com)', 'success');
+      emailInput.value = '';
+      
+      // Reset button after 4 seconds
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        btn.style.backgroundColor = '';
+        btn.style.borderColor = '';
+      }, 4000);
+    }, 800);
   });
 }

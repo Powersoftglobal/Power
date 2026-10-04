@@ -96,4 +96,62 @@
     el.textContent = currentYear;
   });
 
+  // ---- Newsletter Subscription ----
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('newsletterEmail');
+      const btn = newsletterForm.querySelector('button[type="submit"]');
+
+      if (!emailInput.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        alert('Please enter a valid email address.');
+        emailInput.focus();
+        return;
+      }
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = 'Subscribing...';
+      btn.disabled = true;
+
+      // Simulate API call for local testing
+      setTimeout(() => {
+        btn.innerHTML = 'Subscribed';
+        btn.style.backgroundColor = '#10b981'; // Success green
+        btn.style.borderColor = '#10b981';
+        
+        // Simple inline toast for pages.js
+        const toast = document.createElement('div');
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.right = '20px';
+        toast.style.backgroundColor = '#10b981';
+        toast.style.color = 'white';
+        toast.style.padding = '12px 24px';
+        toast.style.borderRadius = '6px';
+        toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        toast.style.zIndex = '9999';
+        toast.style.fontSize = '14px';
+        toast.style.transition = 'opacity 0.3s ease';
+        toast.textContent = 'Subscribed! (Confirmation email simulated to info@powersoftsolution.com)';
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+
+        emailInput.value = '';
+        
+        // Reset button after 4 seconds
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+          btn.style.backgroundColor = '';
+          btn.style.borderColor = '';
+        }, 4000);
+      }, 800);
+    });
+  }
+
 })();
